@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const appoRoutes = require("./routes/appointment");
 const userRoutes = require("./routes/user");
+const dateRoutes = require("./routes/dates");
 
 require("./db.js");
 
@@ -26,6 +27,7 @@ server.use((req, res, next) => {
 // server.use('/', routes);
 server.use("/", appoRoutes);
 server.use("/", userRoutes);
+server.use("/", dateRoutes);
 
 // Error catching endware.
 server.use((err, req, res, next) => {

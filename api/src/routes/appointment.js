@@ -10,16 +10,16 @@ router.get("/appointment", async (req, res) => {
 
   if (date) {
     try {
-      const res = await appoByDate(date);
-      return res.status(200).json(res);
+      const result = await appoByDate(date);
+      return res.status(200).json(result);
     } catch (err) {
       return res.status(400).json({ error: err });
     }
   }
 
   try {
-    const res = await allAppo();
-    return res.status(200).json(res);
+    const result = await allAppo();
+    return res.status(200).json(result);
   } catch (err) {
     return res.status(400).json({ error: err });
   }
@@ -31,18 +31,18 @@ router.get("/appointment/:appoId", async (req, res) => {
   if (!appoId) throw new Error("Params must be true");
 
   try {
-    const res = await appoById(appoId);
-    res.status(200).json(res);
+    const result = await appoById(appoId);
+    return res.status(200).json(result);
   } catch (err) {
-    res.status(400).json({ error: err });
+    return res.status(400).json({ error: err });
   }
 });
 
 router.post("/appointment", async (req, res) => {
-  const { date, description } = req.body;
-
+  const { petName, email, number, service, profesional, date, hour } = req.body;
+  console.log({ petName, email, number, service, profesional, date, hour });
   try {
-    const newAppo = await newApp(date, description);
+    const newAppo = await newApp(petName, email, number, service, profesional, date, hour);
     res.status(200).json(newAppo);
   } catch (err) {
     res.status(400).json({ error: err });

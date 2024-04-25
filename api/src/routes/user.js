@@ -9,16 +9,16 @@ router.get("/user", async (req, res) => {
 
   if (name) {
     try {
-      const res = await userByName(name);
-      return res.status(200).json(res);
+      const result = await userByName(name);
+      return res.status(200).json(result);
     } catch (err) {
       return res.status(400).json({ error: err });
     }
   }
 
   try {
-    const res = await users();
-    return res.status(200).json(res);
+    const result = await users();
+    return res.status(200).json(result);
   } catch (err) {
     return res.status(400).json({ error: err });
   }
@@ -30,8 +30,8 @@ router.get("/user/:userId", async (req, res) => {
   if (!userId) throw new Error("Params must be true");
 
   try {
-    const res = await userById(userId);
-    res.status(200).json(res);
+    const result = await userById(userId);
+    res.status(200).json(result);
   } catch (err) {
     res.status(400).json({ error: err });
   }

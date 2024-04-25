@@ -1,9 +1,14 @@
 const { User, Appointment } = require("../db");
 
-const newApp = async (date, description) => {
+const newApp = async (petName, email, number, service, profesional, date, hour) => {
   const newApp = Appointment.create({
+    petName,
+    email,
+    number,
+    service,
+    profesional,
     date,
-    description,
+    hour,
   });
 
   return newApp;
@@ -35,7 +40,7 @@ const appoByDate = async (date) => {
 };
 
 const appoById = async (id) => {
-  const result = Appointment.findByPk(id, {
+  const result = await Appointment.findByPk(id, {
     include: {
       model: User,
       attributes: ["name"],

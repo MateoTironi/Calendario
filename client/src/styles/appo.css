@@ -1,0 +1,82 @@
+.wrapper_appo {
+  width: 450px;
+  background: #fffefecb;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  margin-left: 5px;
+}
+
+.appo_container {
+  border: 5px;
+  background: #86ced775;
+  text-align: center;
+  box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3%);
+}
+
+.appo_res {
+  height: 55px;
+  width: 100%;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 30px;
+}
+
+.arrow {
+  height: 55px;
+  width: 100%;
+  color: #fff;
+  text-decoration: none;
+  margin-left: 50%;
+}
+
+.appo-detail {
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+  border-radius: 6px;
+  padding: 30px;
+  margin: 0 15px;
+  background: #7a7a7a;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.appo_atribu {
+  margin: 10px;
+  background-color: rgb(230, 221, 221);
+  border-radius: 5px;
+  display: flex;
+  align-content: center;
+}
+
+.appo_atribu label {
+  /* margin-left: 10px; */
+  margin: 10px;
+  font-size: medium;
+}
+
+.appo_title {
+  margin: 10px;
+  font-size: xx-large;
+  background-color: rgb(230, 221, 221);
+  border-radius: 5px;
+}
+
+.new_day {
+  margin: 20px;
+  text-decoration: none;
+  font-size: medium;
+  background-color: #565656;
+
+  color: #fff;
+  border-radius: 5px;
+}
+
+.appo_container_r {
+  border: 5px;
+  background: #d4938175;
+  text-align: center;
+  box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3%);
+}

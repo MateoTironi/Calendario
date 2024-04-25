@@ -8,11 +8,31 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true,
     },
-    date: {
-      type: DataTypes.DATE,
+    petName: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    number: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    date: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    hour: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    profesional: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    service: {
       type: DataTypes.STRING,
       allowNull: true,
     },
