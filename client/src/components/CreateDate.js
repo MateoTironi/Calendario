@@ -1,27 +1,35 @@
 import { useDispatch } from "react-redux";
-import "../styles/createDate.css";
+import "../styles/appo.css";
 import { createDate } from "../actions";
 import { NavLink } from "react-router-dom";
 
-export default function CreateDate() {
+export default function CreateDate({ clickDay }) {
   let dispatch = useDispatch();
+  const now = new Date();
+  const year = now.getFullYear();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(createDate({ date: e.target[0].value, hour: e.target[1].value, reserved: false }));
+
+    dispatch(
+      createDate({
+        date: `${year}-${clickDay.month}-${clickDay.day}`,
+        hour: e.target[0].value + ":00",
+        reserved: false,
+      })
+    );
     alert("Fecha creada con exito");
   };
 
   return (
-    <form className="create_date" onSubmit={handleSubmit}>
-      <NavLink to={`/calendar`}>{"<"}</NavLink>
-      <div>
+    <form className="" onSubmit={handleSubmit}>
+      {/* <div>
         <label>Fecha: </label>
         <input placeholder="YYYY-MM-DD"></input>
-      </div>
+      </div> */}
       <div>
         <label>Hora: </label>
-        <input placeholder="00:00:00"></input>
+        <input type="time"></input>
       </div>
       <button onSubmit={handleSubmit}>Crear</button>
     </form>

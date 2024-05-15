@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAppoId } from "../actions";
+import { NavLink } from "react-router-dom";
 import "../styles/appo.css";
 
 export default function AppoDetail(props) {
@@ -24,6 +25,7 @@ export default function AppoDetail(props) {
       {detail.map((e) => {
         return (
           <div>
+            <NavLink to={`/calendar`}>{"<-"}</NavLink>
             <h1 className="appo_title">{`Fecha: ${e.date}   Hs: ${e.hour}`}</h1>;
             <div class="appo_atribu">
               <label>Nombre de la mascota: </label>

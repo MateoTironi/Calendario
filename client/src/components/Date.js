@@ -8,6 +8,8 @@ import { addDays, isWeekend } from "date-fns";
 export default function Dates({ d, avDays }) {
   const [date, setDate] = useState(null);
   const [hour, setHour] = useState([]);
+  const av = [];
+
   const months = {
     Jan: "01",
     Feb: "02",
@@ -81,13 +83,14 @@ export default function Dates({ d, avDays }) {
             e.id !== resDay.id
         )
       : false;
-    console.log(dayOff);
+
     if (dayOff) {
       return true;
     }
     if (!notDate) {
       return true;
     }
+    // av.push({ day: day[2], m });
     return false;
   };
 
@@ -109,9 +112,10 @@ export default function Dates({ d, avDays }) {
         dateFormat={"dd-MM-yyyy"}
         minDate={minD}
         filterDate={filterWeekends}
+        name="form_date"
       />
 
-      <select id="horas" name="horas">
+      <select id="horas" name="form_hour">
         {hour.map((e) => {
           return <option data-idprofesional="1">{e}</option>;
         })}

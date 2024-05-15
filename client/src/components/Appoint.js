@@ -1,12 +1,16 @@
+import { useState } from "react";
 import "../styles/appo.css";
 import { NavLink } from "react-router-dom";
+import CreateDate from "./CreateDate";
 
 export default function Appo({ appointment, clickDay, avDays }) {
+  let [show, setShow] = useState(false);
+  console.log("ENTRE");
   const renderAppo = (appointment, clickDay, avDays) => {
     let appo = [];
     const reserved = appointment[0].filter(
       (e) =>
-        e.date.split("-")[1] === `0${clickDay.month}` && e.date.split("-")[2] === `${clickDay.day}`
+        e.date.split("-")[1] === `${clickDay.month}` && e.date.split("-")[2] === `${clickDay.day}`
     );
 
     reserved.forEach((e) => {
@@ -15,7 +19,7 @@ export default function Appo({ appointment, clickDay, avDays }) {
 
     const dispDays = avDays[0].filter(
       (e) =>
-        e.date.split("-")[1] === `0${clickDay.month}` && e.date.split("-")[2] === `${clickDay.day}`
+        e.date.split("-")[1] === `${clickDay.month}` && e.date.split("-")[2] === `${clickDay.day}`
     );
     dispDays.forEach((e) => {
       appo.push(e);
@@ -28,7 +32,13 @@ export default function Appo({ appointment, clickDay, avDays }) {
 
     return appo;
   };
-  // console.log(renderAppo(appointment, clickDay, avDays));
+
+  const handleClick = () => {
+    if (show) {
+      setShow(false);
+    } else setShow(true);
+  };
+
   return (
     <div className="wrapper_appo">
       {renderAppo(appointment, clickDay, avDays).map((e) => {
@@ -51,9 +61,18 @@ export default function Appo({ appointment, clickDay, avDays }) {
         );
       })}
       <hr />
-      <NavLink to={`/createDate`} className="new_day">
-        Crear una nueva fecha
-      </NavLink>
+      {show ? (
+        <div className="create_date">
+          <h5 onClick={handleClick} className="xcreate">
+            X
+          </h5>
+          <CreateDate clickDay={clickDay} />
+        </div>
+      ) : (
+        <h5 onClick={handleClick} className="new_day">
+          Crear horario
+        </h5>
+      )}
     </div>
   );
 }

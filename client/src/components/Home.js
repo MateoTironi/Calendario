@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/home.css";
 import { cleanState, createAppo, getDate, getDayOff, updateDate } from "../actions";
 import Dates from "./Date";
 import { formSchema } from "./validation/formValidation";
+import emailjs from "@emailjs/browser";
 // import * as yup from "yup";
 
 export default function Home() {
   const dispatch = useDispatch();
+  const form = useRef();
 
   useEffect(
     (e) => {
@@ -21,8 +23,32 @@ export default function Home() {
   let date = useSelector((state) => state.date);
   let dayOff = useSelector((state) => state.dayOff);
 
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    // const d = {
+    //   petName: form.current[0],
+    //   email: form.current[1],
+    //   number: form.current[2],
+    //   service: form.current[3],
+    //   profesional: form.current[4],
+    //   date: form.current[5],
+    //   hour: form.current[6],
+    // };
+
+    emailjs.sendForm("service_3verqu1", "template_ml2gpc6", form.current, "JB-CYdFyBKkY8Slw_").then(
+      () => {
+        console.log("SUCCESS!");
+      },
+      (error) => {
+        console.log("FAILED...", error.text);
+      }
+    );
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(event.target[1].value);
     let formData = {
       petName: event.target[0].value,
       email: event.target[1].value,
@@ -32,6 +58,7 @@ export default function Home() {
       date: event.target[5].value,
       hour: event.target[6].value,
     };
+    const send = sendEmail(event);
 
     const isValid = await formSchema.isValid(formData);
 
@@ -45,7 +72,6 @@ export default function Home() {
 
     dispatch(createAppo(formData));
     dispatch(updateDate(reservedDay));
-    alert(`Haz recervado el dia ${formData.date}`);
   };
 
   return (
@@ -53,15 +79,15 @@ export default function Home() {
       <section class="container">
         <header>Turnos</header>
         <p>Completa el siguiente formulario para reservar tu turno</p>
-        <form action="#" class="form" onSubmit={handleSubmit}>
+        <form ref={form} action="#" class="form" onSubmit={handleSubmit}>
           <h2>Datos</h2>
           <div class="input-box">
             <label>Nombre de la mascota</label>
-            <input type="text" placeholder="Nombre de la mascota" required />
+            <input type="text" name="form_petName" placeholder="Nombre de la mascota" required />
           </div>
           <div class="input-box">
             <label>Email</label>
-            <input type="text" placeholder="Email" required />
+            <input type="text" placeholder="Email" name="form_email" required />
           </div>
           <div class="column">
             <div class="input-box">
@@ -70,7 +96,12 @@ export default function Home() {
                 <span>+54</span>
               </div>
               {/* <input className="code-area" type="tel" placeholder="Codigo de area"></input> */}
-              <input className="cel-number" type="tel" placeholder="XXXXXXXX"></input>
+              <input
+                className="cel-number"
+                name="form_number"
+                type="tel"
+                placeholder="XXXXXXXX"
+              ></input>
               <small>Sin 0 ni 15. Ingrese sólo números.</small>
             </div>
           </div>
@@ -80,7 +111,7 @@ export default function Home() {
             <label>Servicio</label>
             <div class="column">
               <div class="select-box">
-                <select>
+                <select name="form_service">
                   <option value="A1 Ecografia abdominal ($15000)">
                     A1 Ecografia abdominal ($15000)
                   </option>
@@ -134,8 +165,10 @@ export default function Home() {
             <div className="input-box address">
               <label>Profesional</label>
               <div class="select-box">
-                <select>
+                <select name="form_profesional">
                   <option value="maria julia villata">maria julia villata</option>
+                  <option value="mario casas">mario casas</option>
+                  <option value="eduardo casanova">eduardo casanova</option>
                 </select>
               </div>
             </div>
@@ -145,7 +178,7 @@ export default function Home() {
             </div>
           </div>
           <button className="sub_button" onSubmit={handleSubmit}>
-            Submit
+            Reservar
           </button>
         </form>
       </section>

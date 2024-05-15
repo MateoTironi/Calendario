@@ -25,6 +25,7 @@ export default function rootReducer(state = initialState, action) {
   switch (action.type) {
     //-----------------------------DATE----------------------------------
     case GET_DATE:
+      localStorage.setItem("dispDays", JSON.stringify([action.payload]));
       return {
         ...state,
         date: [action.payload],
@@ -44,6 +45,7 @@ export default function rootReducer(state = initialState, action) {
 
     //-----------------------------APPOINTMENT----------------------------------
     case GET_APPO:
+      localStorage.setItem("appoint", JSON.stringify([action.payload]));
       return {
         ...state,
         appointment: [...state.appointment, action.payload],

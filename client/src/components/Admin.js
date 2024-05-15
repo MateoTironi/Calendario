@@ -25,20 +25,26 @@ export default function Admin() {
   var day = now.getDate();
   let [month, setMonth] = useState(now.getMonth());
   let [year, setYear] = useState(now.getFullYear());
-  let [apposhow, setAppoShow] = useState(false);
-  let [clickDay, setClickDay] = useState();
+  let [apposhow, setAppoShow] = useState(JSON.parse(localStorage.getItem("apposhow")));
   let currentMonth = now.getMonth();
 
   useEffect(
     (e) => {
       dispatch(getAppo());
       dispatch(getDate());
+      localStorage.setItem("apposhow", false);
     },
     [dispatch]
   );
 
-  let appointment = useSelector((state) => state.appointment);
-  let avDays = useSelector((state) => state.date);
+  // let appointment = useSelector((state) => state.appointment);
+  // let avDays = useSelector((state) => state.date);
+
+  let [clickDay, setClick] = useState(JSON.parse(localStorage.getItem("clickDay")));
+
+  let dispDays = JSON.parse(localStorage.getItem("dispDays"));
+  let appoint = JSON.parse(localStorage.getItem("appoint"));
+  // let clickDay = JSON.parse(localStorage.getItem("clickDay"));
 
   const getNextMonth = () => {
     if (month !== 11) {
@@ -110,10 +116,20 @@ export default function Admin() {
   };
 
   const appo = (e) => {
-    setClickDay({
-      day: e.target.value,
-      month: month + 1,
-    });
+    setAppoShow(false);
+    let m = month;
+    let d = e.target.value;
+    if (m < 10) {
+      m = `0${month + 1}`;
+    } else m = month + 1;
+
+    if (d < 10) {
+      d = `0${d}`;
+    }
+    localStorage.setItem("clickDay", JSON.stringify({ day: d, month: m }));
+    localStorage.setItem("apposhow", true);
+
+    setClick({ day: d, month: m });
     setAppoShow(true);
   };
 
@@ -149,7 +165,7 @@ export default function Admin() {
                 return <li className="prev_days">{e.day}</li>;
               }
               return (
-                <li value={e} onClick={appo}>
+                <li className="av_days" value={e} onClick={appo}>
                   {e}
                 </li>
               );
@@ -158,7 +174,7 @@ export default function Admin() {
         </div>
       </div>
 
-      {apposhow ? <Appo appointment={appointment} clickDay={clickDay} avDays={avDays} /> : null}
+      {apposhow ? <Appo appointment={appoint} clickDay={clickDay} avDays={dispDays} /> : null}
     </div>
   );
 }

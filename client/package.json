@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@emailjs/browser": "^3.4.0",
     "@headlessui/react": "^1.6.1",
     "@heroicons/react": "^1.0.6",
     "@syncfusion/ej2-react-schedule": "^24.2.8",

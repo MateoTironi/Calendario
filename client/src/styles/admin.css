@@ -6,14 +6,14 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-body {
+/* body {
   display: flex;
   align-items: center;
   padding: 0 10px;
   justify-content: center;
   min-height: 100vh;
   background: #9b59b6;
-}
+} */
 .wrapper {
   width: 450px;
   background: #fff;
@@ -74,7 +74,6 @@ header .current-date {
 }
 .calendar .days li {
   z-index: 1;
-  cursor: pointer;
   position: relative;
   margin-top: 30px;
 }
@@ -104,8 +103,13 @@ header .current-date {
 
 .prev_days {
   opacity: 0.5;
+  cursor: default;
 }
 
 .admin {
   display: flex;
+}
+
+.av_days {
+  cursor: pointer;
 }

@@ -11,7 +11,9 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgb(130, 106, 251);
+  background-image: url("../img/fondoHome.jpg");
+  background-size: cover;
+  background-position: center;
 }
 .container {
   margin: 50px;
@@ -19,6 +21,7 @@ body {
   max-width: 700px;
   width: 100%;
   background: #fff;
+  opacity: 0.95;
   padding: 25px;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);

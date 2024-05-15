@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const { Dates } = require("../db");
 
 const dates = async () => {
@@ -15,6 +16,10 @@ const dayOff = async () => {
 };
 
 const newDates = async (date, hour, reserved) => {
+  const resDay = await Dates.findOne({ where: { date, hour } });
+
+  if (resDay) return Error("Este horario ya existe");
+
   const newD = await Dates.create({
     date,
     hour,
