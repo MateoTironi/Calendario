@@ -70,27 +70,36 @@ export default function Dates({ d, avDays }) {
       }
     }
 
-    const resDay = d[0].find((e) => e.date.split("-")[2] === day[2] && m === e.date.split("-")[1]);
+    if (av[0]) {
+      const dAv = av.find((e) => {
+        e.day == day[2] && e.m == m;
+      });
+
+      if (dAv) return false;
+    }
+
+    // const resDay = d[0].find((e) => e.date.split("-")[2] === day[2] && m === e.date.split("-")[1]);
     const notDate = avDays[0].find(
       (e) => e.date.split("-")[2] === day[2] && m === e.date.split("-")[1]
     );
 
-    const dayOff = resDay
-      ? d[0].find(
-          (e) =>
-            e.date.split("-")[2] === resDay.date.split("-")[2] &&
-            m === e.date.split("-")[1] &&
-            e.id !== resDay.id
-        )
-      : false;
+    // const dayOff = resDay
+    //   ? d[0].find(
+    //       (e) =>
+    //         e.date.split("-")[2] === resDay.date.split("-")[2] &&
+    //         m === e.date.split("-")[1] &&
+    //         e.id !== resDay.id
+    //     )
+    //   : false;
 
-    if (dayOff) {
-      return true;
-    }
+    // if (dayOff) {
+    //   return true;
+    // }
     if (!notDate) {
       return true;
     }
-    // av.push({ day: day[2], m });
+
+    av.push({ day: day[2], m });
     return false;
   };
 
