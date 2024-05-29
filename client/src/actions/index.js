@@ -88,10 +88,10 @@ export function createAppo({ petName, email, number, service, profesional, date,
 }
 
 //-----------------------------USER----------------------------------
-export function getUserName(name) {
+export function getUserName(gmail) {
   return function (dispatch) {
     axios
-      .get("http://localhost:3001/user", { name })
+      .get("http://localhost:3001/user", { gmail })
       .catch((err) => alert(err))
       .then((r) => dispatch({ type: GET_USER_NAME, payload: r.data }));
   };

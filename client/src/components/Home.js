@@ -26,16 +26,6 @@ export default function Home() {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    // const d = {
-    //   petName: form.current[0],
-    //   email: form.current[1],
-    //   number: form.current[2],
-    //   service: form.current[3],
-    //   profesional: form.current[4],
-    //   date: form.current[5],
-    //   hour: form.current[6],
-    // };
-
     emailjs.sendForm("service_3verqu1", "template_ml2gpc6", form.current, "JB-CYdFyBKkY8Slw_").then(
       () => {
         console.log("SUCCESS!");
@@ -48,15 +38,15 @@ export default function Home() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(event.target[1].value);
+
     let formData = {
       petName: event.target[0].value,
       email: event.target[1].value,
-      number: event.target[2].value,
-      service: event.target[3].value,
-      profesional: event.target[4].value,
-      date: event.target[5].value,
-      hour: event.target[6].value,
+      number: event.target[2].value + " " + event.target[3].value,
+      service: event.target[4].value,
+      profesional: event.target[5].value,
+      date: event.target[6].value,
+      hour: event.target[7].value,
     };
     const send = sendEmail(event);
 
@@ -92,10 +82,7 @@ export default function Home() {
           <div class="column">
             <div class="input-box">
               <label>Telefono celular</label>
-              <div>
-                <span>+54</span>
-              </div>
-              {/* <input className="code-area" type="tel" placeholder="Codigo de area"></input> */}
+              <input className="code-area" type="tel" placeholder="Codigo de area"></input>
               <input
                 className="cel-number"
                 name="form_number"

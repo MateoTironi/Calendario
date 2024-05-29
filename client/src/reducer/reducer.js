@@ -66,7 +66,7 @@ export default function rootReducer(state = initialState, action) {
     case GET_USER_NAME:
       return {
         ...state,
-        userDetail: [action.payload],
+        user: [action.payload],
       };
 
     case GET_USER_ID:

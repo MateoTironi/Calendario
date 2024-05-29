@@ -5,11 +5,11 @@ const { users, userByName, userById, newUser } = require("../utils/utilsUser");
 const router = Router();
 
 router.get("/user", async (req, res) => {
-  let { name } = req.body;
+  let { gmail } = req.body;
 
-  if (name) {
+  if (gmail) {
     try {
-      const result = await userByName(name);
+      const result = await userByName(gmail);
       return res.status(200).json(result);
     } catch (err) {
       return res.status(400).json({ error: err });

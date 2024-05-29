@@ -13,9 +13,9 @@ const users = async () => {
   return result;
 };
 
-const userByName = async (name) => {
+const userByName = async (gmail) => {
   const result = User.findOne({
-    where: { name },
+    where: { gmail },
     include: {
       model: Appointment,
       attributes: ["date", "description"],
